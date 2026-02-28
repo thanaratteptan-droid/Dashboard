@@ -80,3 +80,17 @@ with tab2:
     with middle:
         st.plotly_chart(fig_pie, width="stretch")
 
+st.divider()
+st.subheader("📄 ข้อมูลผู้เล่นแบบละเอียด")
+
+# แสดงตารางข้อมูลที่กรองแล้ว
+st.dataframe(df_filtered, use_container_width=True)
+
+# เพิ่มปุ่ม Download CSV
+csv = df_filtered.to_csv(index=False).encode('utf-8')
+st.download_button(
+    label="📥 ดาวน์โหลดข้อมูลเป็น CSV",
+    data=csv,
+    file_name='game_analytics_data.csv',
+    mime='text/csv',
+)
