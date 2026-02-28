@@ -17,6 +17,13 @@ st.title("🕹️ 2D Shooter Game Analytics")
 st.markdown("**แดชบอร์ดสรุปสถิติผู้เล่นเกมชูตติ้ง 2 มิติ** วิเคราะห์พฤติกรรมและความสมดุลของเกม")
 st.divider() # เส้นคั่นสวยๆ
 
+st.sidebar.image("https://cdn-icons-png.flaticon.com/512/860/860471.png", width=100) # ใส่รูปโลโก้เกมเล็กๆ ใน sidebar
+st.sidebar.header("⚙️ Filter Options")
+selected_weapons = st.sidebar.multiselect(
+    "🔫 เลือกอาวุธที่ต้องการดูสถิติ:",
+    options=df["favorite_weapon"].unique(),
+    default=df["favorite_weapon"].unique()
+)
 # กรองข้อมูลตามอาวุธที่เลือก
 df_filtered = df[df["favorite_weapon"].isin(selected_weapons)]
 
