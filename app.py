@@ -42,28 +42,41 @@ kpi3.metric(label="⏱️ เวลาเล่นเฉลี่ย", value=f"{
 st.write("") 
 st.write("")
 
-# 4. กราฟที่ 1: Bar Chart (จำนวนผู้เล่นในแต่ละด่าน)
-with col1:
-    st.subheader("📊 จำนวนผู้เล่นในแต่ละเลเวล")
-    fig_bar = px.histogram(
-        df_filtered, 
-        x="level_reached", 
-        color="favorite_weapon", 
-        barmode="group",
-        labels={"level_reached": "Level", "count": "Number of Players"}
-    )
-    st.plotly_chart(fig_bar, use_container_width=True)
+tab1, tab2 = st.tabs(["📊 สถิติผู้เล่น & เลเวล", "🎯 วิเคราะห์อาวุธยอดฮิต"])
 
-# 5. กราฟที่ 2: Scatter Plot (ความสัมพันธ์ระหว่างเวลาเล่นและคะแนน)
-with col2:
-    st.subheader("📈 เวลาที่เล่น vs คะแนนที่ได้")
-    fig_scatter = px.scatter(
-        df_filtered, 
-        x="play_time_minutes", 
-        y="score", 
-        color="favorite_weapon", 
-        size="score",
-        labels={"play_time_minutes": "Play Time (Mins)", "score": "Score"}
+with tab1:
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("#### 🏆 จำนวนผู้เล่นในแต่ละเลเวล")
+        fig_bar = px.histogram(
+            df_filtered, x="level_reached", color="favorite_weapon", 
+            barmode="group", text_auto=True, # text_auto ทำให้มีตัวเลขโชว์บนแท่งกราฟ
+            color_discrete_sequence=px.colors.qualitative.Pastel # เปลี่ยนโทนสีกราฟให้ละมุนขึ้น
+        )
+        st.plotly_chart(fig_bar, width="stretch")
+        
+    with col2:
+        st.markdown("#### 📈 เวลาที่เล่น vs คะแนนที่ได้")
+        fig_scatter = px.scatter(
+            df_filtered, x="play_time_minutes", y="score", 
+            color="favorite_weapon", size="score",
+            color_discrete_sequence=px.colors.qualitative.Pastel
+        )
+        st.plotly_chart(fig_scatter, width="stretch")
+
+with tab2:
+    st.markdown("#### 🎯 สัดส่วนความนิยมของอาวุธ")
+    weapon_counts = df_filtered["favorite_weapon"].value_counts().reset_index()
+    weapon_counts.columns = ['Weapon', 'Count']
+    
+    fig_pie = px.pie(
+        weapon_counts, names="Weapon", values="Count", 
+        hole=0.4, # ทำให้เป็น Donut chart
+        color_discrete_sequence=px.colors.qualitative.Pastel
     )
-    st.plotly_chart(fig_scatter, use_container_width=True)
+    # ปรับให้กราฟอยู่ตรงกลาง
+    left, middle, right = st.columns([1, 2, 1])
+    with middle:
+        st.plotly_chart(fig_pie, width="stretch")
 
