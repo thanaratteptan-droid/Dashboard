@@ -52,7 +52,7 @@ with c2:
     st.success(f"**คะแนนสูงสุด:** {mvp_player['score']:,}")
 with c3:
     st.warning(f"**อาวุธคู่ใจ:** {mvp_player['favorite_weapon']}")
-    
+
 tab1, tab2 = st.tabs(["📊 สถิติผู้เล่น & เลเวล", "🎯 วิเคราะห์อาวุธยอดฮิต"])
 
 with tab1:
@@ -105,3 +105,9 @@ st.download_button(
     file_name='game_analytics_data.csv',
     mime='text/csv',
 )
+
+# เพิ่มช่อง Search ใน Sidebar
+search_query = st.sidebar.text_input("🔍 ค้นหา Player ID:", "")
+
+if search_query:
+    df_filtered = df_filtered[df_filtered['player_id'].str.contains(search_query, case=False)] 
