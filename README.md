@@ -34,7 +34,9 @@
 * Clone the Repository
 ```bash
 git clone https://github.com/thanaratteptan-droid/Dashboard
+cd Dashboard
 pip install -r requirements.txt
 python -m streamlit run app.py
 
 ```
+
