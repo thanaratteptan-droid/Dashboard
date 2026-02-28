@@ -111,3 +111,20 @@ search_query = st.sidebar.text_input("🔍 ค้นหา Player ID:", "")
 
 if search_query:
     df_filtered = df_filtered[df_filtered['player_id'].str.contains(search_query, case=False)] 
+
+st.write("---")
+st.subheader("🔍 เจาะลึกความสัมพันธ์ของข้อมูล (Custom Explorer)")
+
+col_x, col_y = st.columns(2)
+with col_x:
+    x_axis = st.selectbox("เลือกแกน X:", ["play_time_minutes", "score", "level_reached"])
+with col_y:
+    y_axis = st.selectbox("เลือกแกน Y:", ["score", "play_time_minutes", "level_reached"])
+
+fig_custom = px.scatter(
+    df_filtered, x=x_axis, y=y_axis, 
+    color="favorite_weapon", 
+    trendline="ols", # เพิ่มเส้นแนวโน้ม (Regression Line) ให้ดูฉลาดขึ้น
+    title=f"ความสัมพันธ์ระหว่าง {x_axis} และ {y_axis}"
+)
+st.plotly_chart(fig_custom, width="stretch")
