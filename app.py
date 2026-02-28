@@ -150,3 +150,14 @@ fig_custom = px.scatter(
     title=f"ความสัมพันธ์ระหว่าง {x_axis} และ {y_axis}"
 )
 st.plotly_chart(fig_custom, width="stretch")
+
+fig_scatter = px.scatter(
+    df_filtered, x="play_time_minutes", y="score", 
+    color="favorite_weapon", size="score",
+    hover_name="player_id", # เอาเมาส์ชี้แล้วเห็นชื่อ Player ID
+    log_x=True, # ใช้ Log scale ในแกน X ให้ดูเหมือนนักวิเคราะห์ข้อมูลตัวจริง
+    template="plotly_white", # หรือ "plotly_dark" ถ้าชอบโทนดำ
+    color_discrete_sequence=px.colors.sequential.Viridis, # ใช้เฉดสีแบบ Gradient
+    animation_frame="level_reached" # เพิ่มตัวเลื่อน Timeline ด้านล่างกราฟ!
+)
+st.plotly_chart(fig_scatter, width="stretch")
