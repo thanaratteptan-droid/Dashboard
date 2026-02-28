@@ -12,13 +12,10 @@ def load_data():
 
 df = load_data()
 
-# 3. สร้าง Interactive Component (Sidebar Filter)
-st.sidebar.header("⚙️ Filter Options")
-selected_weapons = st.sidebar.multiselect(
-    "เลือกอาวุธที่ต้องการดูสถิติ:",
-    options=df["favorite_weapon"].unique(),
-    default=df["favorite_weapon"].unique()
-)
+# ส่วนหัวของ Dashboard (Header)
+st.title("🕹️ 2D Shooter Game Analytics")
+st.markdown("**แดชบอร์ดสรุปสถิติผู้เล่นเกมชูตติ้ง 2 มิติ** วิเคราะห์พฤติกรรมและความสมดุลของเกม")
+st.divider() # เส้นคั่นสวยๆ
 
 # กรองข้อมูลตามอาวุธที่เลือก
 df_filtered = df[df["favorite_weapon"].isin(selected_weapons)]
