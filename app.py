@@ -4,22 +4,34 @@ import plotly.express as px
 
 st.markdown("""
     <style>
-    /* ปรับแต่ง Font และพื้นหลัง */
-    .main {
-        background-color: #f8f9fa;
-    }
-    /* สร้าง Card สวยๆ ให้กับ Metrics */
     div[data-testid="stMetric"] {
-        background-color: #ffffff;
-        border: 1px solid #e0e0e0;
-        padding: 15px 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        background: rgba(255, 255, 255, 0.05); /* พื้นหลังโปร่งแสงจางๆ */
+        border: 1px solid rgba(255, 255, 255, 0.1); /* ขอบบางๆ เหมือนกระจก */
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px); /* เอฟเฟกต์เบลอพื้นหลัง */
+        -webkit-backdrop-filter: blur(5px);
     }
-    /* ปรับแต่ง Sidebar */
-    .sidebar .sidebar-content {
-        background-image: linear-gradient(#2e7bcf,#2e7bcf);
-        color: white;
+    
+    /* บังคับสีตัวเลข (Value) ให้เด่นชัด */
+    [data-testid="stMetricValue"] div {
+        color: #00D4FF !important; /* สีฟ้า Cyan สว่างๆ */
+        font-weight: 800 !important;
+        font-size: 2rem !important;
+    }
+    
+    /* บังคับสีหัวข้อ (Label) ให้เป็นสีเทาอ่อนดูแพง */
+    [data-testid="stMetricLabel"] p {
+        color: #A0AEC0 !important;
+        font-size: 1.1rem !important;
+        letter-spacing: 0.5px;
+    }
+
+    /* ตกแต่งส่วน MVP Section ให้มีมุมโค้งสวยๆ */
+    .stAlert {
+        border-radius: 15px !important;
+        border: none !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -159,15 +171,4 @@ fig_scatter = px.scatter(
     template="plotly_white", # หรือ "plotly_dark" ถ้าชอบโทนดำ
     color_discrete_sequence=px.colors.sequential.Viridis, # ใช้เฉดสีแบบ Gradient
     animation_frame="level_reached" # เพิ่มตัวเลื่อน Timeline ด้านล่างกราฟ!
-)
-st.plotly_chart(fig_scatter, width="stretch")
-
-# คำนวณค่าเฉลี่ยรวมของทั้ง Dataset เพื่อเปรียบเทียบ
-overall_avg_score = df["score"].mean()
-
-# แสดงผลแบบมี Delta (ตัวเลขสีเขียว/แดง)
-kpi2.metric(
-    label="🏆 คะแนนเฉลี่ย (Selection)", 
-    value=f"{avg_score:,.0f}",
-    delta=f"{avg_score - overall_avg_score:,.0f} vs Global Average"
 )
