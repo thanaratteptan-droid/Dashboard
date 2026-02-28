@@ -53,3 +53,15 @@ with col2:
         labels={"play_time_minutes": "Play Time (Mins)", "score": "Score"}
     )
     st.plotly_chart(fig_scatter, use_container_width=True)
+
+# 6. กราฟที่ 3: Pie Chart (สัดส่วนอาวุธยอดฮิต)
+st.subheader("🎯 สัดส่วนความนิยมของอาวุธ")
+weapon_counts = df_filtered["favorite_weapon"].value_counts().reset_index()
+weapon_counts.columns = ['Weapon', 'Count']
+fig_pie = px.pie(
+    weapon_counts, 
+    names="Weapon", 
+    values="Count", 
+    hole=0.4 # ทำให้เป็น Donut chart
+)
+st.plotly_chart(fig_pie, use_container_width=True)
