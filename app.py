@@ -31,9 +31,16 @@ df_filtered = df[df["favorite_weapon"].isin(selected_weapons)]
 st.subheader("📌 ภาพรวมสถิติ (Key Metrics)")
 kpi1, kpi2, kpi3 = st.columns(3)
 
-st.divider()
+total_players = len(df_filtered)
+avg_score = df_filtered["score"].mean()
+avg_time = df_filtered["play_time_minutes"].mean()
 
-col1, col2 = st.columns(2)
+kpi1.metric(label="👥 จำนวนผู้เล่นทั้งหมด", value=f"{total_players} คน")
+kpi2.metric(label="🏆 คะแนนเฉลี่ย", value=f"{avg_score:,.0f} แต้ม")
+kpi3.metric(label="⏱️ เวลาเล่นเฉลี่ย", value=f"{avg_time:.1f} นาที")
+
+st.write("") 
+st.write("")
 
 # 4. กราฟที่ 1: Bar Chart (จำนวนผู้เล่นในแต่ละด่าน)
 with col1:
