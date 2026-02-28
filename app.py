@@ -42,6 +42,17 @@ kpi3.metric(label="⏱️ เวลาเล่นเฉลี่ย", value=f"{
 st.write("") 
 st.write("")
 
+st.markdown("### 🏅 MVP of the Selection")
+mvp_player = df_filtered.loc[df_filtered['score'].idxmax()]
+
+c1, c2, c3 = st.columns([1, 1, 2])
+with c1:
+    st.info(f"**ผู้เล่น:** {mvp_player['player_id']}")
+with c2:
+    st.success(f"**คะแนนสูงสุด:** {mvp_player['score']:,}")
+with c3:
+    st.warning(f"**อาวุธคู่ใจ:** {mvp_player['favorite_weapon']}")
+    
 tab1, tab2 = st.tabs(["📊 สถิติผู้เล่น & เลเวล", "🎯 วิเคราะห์อาวุธยอดฮิต"])
 
 with tab1:
