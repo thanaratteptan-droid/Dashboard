@@ -13,3 +13,18 @@ def load_data():
     return pd.read_csv("game_data.csv")
 
 df = load_data()
+
+# 3. สร้าง Interactive Component (Sidebar Filter)
+st.sidebar.header("⚙️ Filter Options")
+selected_weapons = st.sidebar.multiselect(
+    "เลือกอาวุธที่ต้องการดูสถิติ:",
+    options=df["favorite_weapon"].unique(),
+    default=df["favorite_weapon"].unique()
+)
+
+# กรองข้อมูลตามอาวุธที่เลือก
+df_filtered = df[df["favorite_weapon"].isin(selected_weapons)]
+
+st.divider()
+
+col1, col2 = st.columns(2)
