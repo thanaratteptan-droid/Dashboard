@@ -1,0 +1,16 @@
+player_id,score,play_time_minutes,favorite_weapon,level_reached
+P001,4500,12.5,Pistol,3
+P002,8200,25.0,Shotgun,5
+P003,3100,8.2,Pistol,2
+P004,15400,45.3,Laser Rifle,10
+P005,6700,18.1,Shotgun,4
+P006,9100,28.5,Laser Rifle,6
+P007,2200,5.4,Pistol,1
+P008,11500,35.2,Sniper,8
+P009,8800,22.4,Shotgun,5
+P010,13200,40.1,Laser Rifle,9
+P011,5400,15.3,Sniper,3
+P012,7900,20.5,Shotgun,5
+P013,14000,42.0,Sniper,9
+P014,4800,11.2,Pistol,3
+P015,9500,26.8,Laser Rifle,6
