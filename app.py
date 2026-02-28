@@ -24,8 +24,12 @@ selected_weapons = st.sidebar.multiselect(
     options=df["favorite_weapon"].unique(),
     default=df["favorite_weapon"].unique()
 )
+
 # กรองข้อมูลตามอาวุธที่เลือก
 df_filtered = df[df["favorite_weapon"].isin(selected_weapons)]
+
+st.subheader("📌 ภาพรวมสถิติ (Key Metrics)")
+kpi1, kpi2, kpi3 = st.columns(3)
 
 st.divider()
 
