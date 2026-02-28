@@ -161,3 +161,13 @@ fig_scatter = px.scatter(
     animation_frame="level_reached" # เพิ่มตัวเลื่อน Timeline ด้านล่างกราฟ!
 )
 st.plotly_chart(fig_scatter, width="stretch")
+
+# คำนวณค่าเฉลี่ยรวมของทั้ง Dataset เพื่อเปรียบเทียบ
+overall_avg_score = df["score"].mean()
+
+# แสดงผลแบบมี Delta (ตัวเลขสีเขียว/แดง)
+kpi2.metric(
+    label="🏆 คะแนนเฉลี่ย (Selection)", 
+    value=f"{avg_score:,.0f}",
+    delta=f"{avg_score - overall_avg_score:,.0f} vs Global Average"
+)
