@@ -40,3 +40,16 @@ with col1:
         labels={"level_reached": "Level", "count": "Number of Players"}
     )
     st.plotly_chart(fig_bar, use_container_width=True)
+
+# 5. กราฟที่ 2: Scatter Plot (ความสัมพันธ์ระหว่างเวลาเล่นและคะแนน)
+with col2:
+    st.subheader("📈 เวลาที่เล่น vs คะแนนที่ได้")
+    fig_scatter = px.scatter(
+        df_filtered, 
+        x="play_time_minutes", 
+        y="score", 
+        color="favorite_weapon", 
+        size="score",
+        labels={"play_time_minutes": "Play Time (Mins)", "score": "Score"}
+    )
+    st.plotly_chart(fig_scatter, use_container_width=True)
