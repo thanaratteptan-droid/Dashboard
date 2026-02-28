@@ -28,3 +28,15 @@ df_filtered = df[df["favorite_weapon"].isin(selected_weapons)]
 st.divider()
 
 col1, col2 = st.columns(2)
+
+# 4. กราฟที่ 1: Bar Chart (จำนวนผู้เล่นในแต่ละด่าน)
+with col1:
+    st.subheader("📊 จำนวนผู้เล่นในแต่ละเลเวล")
+    fig_bar = px.histogram(
+        df_filtered, 
+        x="level_reached", 
+        color="favorite_weapon", 
+        barmode="group",
+        labels={"level_reached": "Level", "count": "Number of Players"}
+    )
+    st.plotly_chart(fig_bar, use_container_width=True)
