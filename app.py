@@ -2,6 +2,28 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+st.markdown("""
+    <style>
+    /* ปรับแต่ง Font และพื้นหลัง */
+    .main {
+        background-color: #f8f9fa;
+    }
+    /* สร้าง Card สวยๆ ให้กับ Metrics */
+    div[data-testid="stMetric"] {
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        padding: 15px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    /* ปรับแต่ง Sidebar */
+    .sidebar .sidebar-content {
+        background-image: linear-gradient(#2e7bcf,#2e7bcf);
+        color: white;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # 1. ตั้งค่าหน้าเพจ
 st.set_page_config(page_title="2D Game Dashboard", page_icon="🕹️", layout="wide")
 
@@ -124,7 +146,7 @@ with col_y:
 fig_custom = px.scatter(
     df_filtered, x=x_axis, y=y_axis, 
     color="favorite_weapon", 
-    trendline="ols", # เพิ่มเส้นแนวโน้ม (Regression Line) ให้ดูฉลาดขึ้น
+    trendline="ols", 
     title=f"ความสัมพันธ์ระหว่าง {x_axis} และ {y_axis}"
 )
 st.plotly_chart(fig_custom, width="stretch")
